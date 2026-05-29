@@ -1,12 +1,18 @@
-import './App.css'
-import { Button } from "@/components/ui/button"
+import Footer from "./components/common/Footer"
+import Navbar from "./components/common/Navbar"
+import About from "./components/home/ABout"
+import Hero from "./components/home/Hero"
 
 function App() {
   return (
     <>
+      <Navbar></Navbar>
 
-    <Button>Click me</Button>
+      <Hero></Hero>
+
+      <About></About>
       
+      <Footer></Footer>
     </>
   )
 }
