@@ -17,6 +17,20 @@ body {
   font-style: normal;
 }
 
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 15s linear infinite;
+}
+
 :root {
   --text: #5a4f47;
   --text-h: #0d0a08;
