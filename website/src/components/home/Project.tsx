@@ -1,40 +1,33 @@
-import { blogs } from "@/data/blog";
+import { featuredProjects } from "@/data/projects";
 import { Button } from "../ui/button";
-import { ArrowRight } from "lucide-react";
 import { FaGithub } from "react-icons/fa6";
+import { ArrowRight } from "lucide-react";
 
 function Project() {
-    const featuredBlog = blogs.find((blog) => blog.featured)!;
-    const previousBlogs = blogs.filter((blog) => !blog.featured).slice(0,2);
 
   return (
-    <section id="#project" className="min-h-screen flex flex-col gap-8 px-10 mb-30">
+    <section id="#project" className="min-h-screen flex flex-col gap-8 px-8 mb-30">
       <div className="text-primary flex justify-between">
         <p className="text-3xl font-bold">Projects</p>
-        <a href="/blogs" className="flex gap-2 items-center"> <span className="text-lg ">View All</span> <ArrowRight /> </a>
-      </div>
-      <div className="grid col-span-1 text-secondary">
-        <div key={featuredBlog.id} className="flex flex-col w-80 h-145 border shadow-xl ">
-            <div><img src={featuredBlog.image} alt={featuredBlog.title} className="w-full h-70 mb-2"/></div>
-            <div className="flex flex-col gap-3 p-5">
-                <div className="font-bold">{`FEATURED - ${featuredBlog.date}`}</div>
-                <div className="text-xl font-bold">{featuredBlog.title}</div>
-                <div>{featuredBlog.excerpt}</div>
-                <div><Button variant="outline">Github <FaGithub /></Button></div>
-            </div>
-        </div>
+        <a href="https://github.com/Adwoa-p?tab=repositories" className="flex gap-2 items-center"> <span className="text-lg ">View All</span> <ArrowRight /> </a>
       </div>
       <div className="grid col-span-1 text-secondary gap-8">
         {
-            previousBlogs.map((blog) => {
+            featuredProjects.map((project) => {
             return (
-                <div key={blog.id} className="flex flex-col w-80 h-145 border shadow-xl">
-                    <div><img src={blog.image} alt={blog.title} className="w-full h-70 mb-2"/></div>
+                <div key={project.id} className="flex flex-col w-90 h-150 border shadow-xl">
+                    <div><img src={project.image} alt={project.name} className="w-full h-70 mb-2"/></div>
                     <div className="flex flex-col gap-3 p-5">
-                        <div className="font-bold">{blog.date}</div>
-                        <div className="text-xl font-bold">{blog.title}</div>
-                        <div>{blog.excerpt}</div>
-                        <div><Button variant="outline">Github <FaGithub /></Button></div>
+                        <div className="flex gap-1.5">
+                            {
+                                project.tools.map((tool) => (
+                                    <div className="rounded-2xl px-4 py-2 whitespace-nowrap text-center bg-accent/50 text-primary">{tool}</div>
+                                ))
+                            }
+                        </div>
+                        <div className="text-xl font-bold">{project.name}</div>
+                        <div>{project.description}</div>
+                        <a target="_blank" rel="noopener noreferrer" href={project.link}> <Button variant="outline">Github <FaGithub /></Button> </a>
                     </div>
                 </div>
             )

@@ -58,7 +58,7 @@ function About() {
               </div>
               <div
                 aria-hidden="true"
-                className="flex shrink-0 animate-marquee gap-10 min-w-max items-center"
+                className="flex shrink-0 animate-marquee gap-10 min-w-max items-center z-1"
               >
                 {skills.map((icon, index) => {
                   const Icon = icon;
