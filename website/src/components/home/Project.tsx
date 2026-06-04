@@ -6,7 +6,7 @@ import { ArrowRight } from "lucide-react";
 function Project() {
 
   return (
-    <section id="#project" className="min-h-screen flex flex-col gap-8 px-8 mb-30">
+    <section id="#projects" className="min-h-screen flex flex-col gap-8 px-8 mb-30">
       <div className="text-primary flex justify-between">
         <p className="text-3xl font-bold">Projects</p>
         <a href="https://github.com/Adwoa-p?tab=repositories" className="flex gap-2 items-center"> <span className="text-lg ">View All</span> <ArrowRight /> </a>

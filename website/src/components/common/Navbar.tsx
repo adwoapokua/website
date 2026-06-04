@@ -12,34 +12,34 @@ import { SheetFooter } from "../ui/sheet";
 const links = [
   {
     name: "Home",
-    link: "#home",
+    link: "/",
     icon: Home
   },
   {
     name: "About",
-    link: "#about",
+    link: "/#about",
     icon: User
   },
   {
     name: "Projects",
-    link: "#projects",
+    link: "/#projects",
     icon: FolderOpen
   },
   {
     name: "Blog",
-    link: "#blog",
+    link: "/#blog",
     icon: BookOpen
   },
   {
     name: "Contact",
-    link: "#contact",
+    link: "/#contact",
     icon: Mail
   },
 ]
 
 function Navbar() {
   return (
-    <div className="flex justify-between items-center fixed top-0 h-16 p-3 border-b-2 shadow-sm w-full bg-background z-100">
+    <div className="flex justify-between items-center fixed top-0 h-16 p-3 border-b-2 shadow-sm w-full bg-background z-40">
       <div className="flex gap-2">
         <div className="border-2 border-primary rounded-4xl h-8 w-8 p-1 grid place-items-center">
           <span className="text-secondary font-semibold">AP</span>
