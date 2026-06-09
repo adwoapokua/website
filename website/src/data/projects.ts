@@ -16,7 +16,7 @@ export const featuredProjects = [
     id: 2,
     name: "Book Review API",
     description:
-      "A RESTful book review platform built with Django and Django REST Framework. Users can browse books, submit reviews, manage ratings, and interact with a structured API designed around modern backend development practices.",
+      "A RESTful book review platform built with Django and Django REST Framework. Users can browse books, submit reviews, manage ratings, and interact with structured APIs.",
     link: "https://github.com/Adwoa-p/apis",
     image: "./book.png",
     tools: [
@@ -29,7 +29,7 @@ export const featuredProjects = [
     id: 3,
     name: "Portfolio Website",
     description:
-      "A responsive portfolio website built with React and Tailwind CSS to showcase projects, skills, experience, and achievements. Designed and developed from scratch with a focus on clean UI and performance.",
+      "A responsive portfolio website built with React and Tailwind CSS to showcase projects, skills, experience, and achievements. ",
     link: "https://adwoapokua.vercel.app",
     image: "./url.png",
     tools: [

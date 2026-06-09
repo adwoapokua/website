@@ -17,7 +17,7 @@ const links = [
   },
   {
     name: "About",
-    link: "/#about",
+    link: "#about",
     icon: User
   },
   {
@@ -44,11 +44,11 @@ function Navbar() {
         <div className="border-2 border-primary rounded-4xl h-8 w-8 p-1 grid place-items-center">
           <span className="text-secondary font-semibold">AP</span>
         </div>
-        <div className="text-secondary grid items-center font-semibold">
+        <a className="text-secondary grid items-center font-semibold">
           Adwoa Pokua
-        </div>
+        </a>
       </div>
-      <div>
+      <div className="lg:hidden">
         <Sheet>
           <SheetTrigger><Menu className="text-primary grid items-center"/></SheetTrigger>
           <SheetContent>
@@ -71,6 +71,15 @@ function Navbar() {
           </SheetContent>
         </Sheet>
       </div>
+      <div className="lg:flex justify-between gap-5 px-5 text-secondary hidden">
+              {
+                links.map((item) => {
+                  return (
+                    <a key={item.name} href={item.link} className="flex gap-2 text-sm hover:text-primary">{item.name}</a>
+                  )
+                })
+              }
+            </div>
     </div>
   )
 }

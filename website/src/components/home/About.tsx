@@ -27,19 +27,22 @@ import {
 
 function About() {
   return (
-    <section className="min-h-screen flex flex-col gap-8 px-10" id="#about" >
-      <div className="text-primary ">ABOUT ME</div>
+    <section className="min-h-screen flex flex-col gap-5 px-10 lg:px-20 scroll-mt-24" id="about" >
+      <div className="text-primary lg:text-3xl lg:font-bold">ABOUT ME</div>
 
-      <div className="flex flex-col gap-5">
-        <p className="text-2xl font-semibold text-secondary">Designing digital spaces with simplicity, rhythm, and attention to detail.</p>
-        <p className="text-xl text-secondary">Adwoa is a software engineer and student in Accra, 
-            exploring the meeting point between mathematics, 
-            technology, and modern web design.
-        </p>
-        <img src="./about.jpg" alt="about me" className="w-80 h-50"/>
+      <div className="flex flex-col lg:gap-10">
+        <div className="flex flex-col lg:flex-row gap-15">
+          <div className="flex flex-col gap-3 lg:w-150">
+            <p className="text-2xl font-semibold text-secondary">Designing digital spaces with simplicity, rhythm, and attention to detail.</p>
+            <p className="text-xl text-secondary">Adwoa is a software engineer and student in Accra, 
+                exploring the meeting point between mathematics, 
+                technology, and modern web design.
+            </p>
+          </div>
+        <img src="./about.jpg" alt="about me" className="w-80 h-50 lg:w-120 lg:h-100"/>
       </div>
 
-      <div className="flex flex-col gap-5">
+      <div className="flex flex-col gap-5 mt-10 lg:mt-0">
         <p className="text-primary text-lg">TOOLKIT</p>
             <div className="relative flex overflow-hidden py-4 gap-10">
               <div className="flex shrink-0 animate-marquee gap-10 min-w-max items-center">
@@ -74,6 +77,7 @@ function About() {
                 })}
               </div>
             </div>  
+      </div>
       </div>
     </section>
   )
