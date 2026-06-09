@@ -1,6 +1,5 @@
 import { MoveDown } from "lucide-react"
 import { Button } from "../ui/button"
-import { NavLink } from "react-router"
 import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa"
 
 function Hero() {
@@ -18,15 +17,15 @@ function Hero() {
           <a href="#contact"><Button variant="outline" size="lg">Say Hello 👋</Button></a>
         </div>
         <div className="flex gap-6 mt-8">
-            <NavLink to="https://github.com/Adwoa-p">
+            <a href="https://github.com/Adwoa-p" target="_blank" rel="noopener noreferrer">
               <FaGithub size="28" className="text-secondary-foreground hover:text-primary-foreground transition-colors" />
-            </NavLink>
-            <NavLink to="https://www.instagram.com/adwoaa_p/">
+            </a>
+            <a href="https://www.instagram.com/adwoaa_p/" target="_blank" rel="noopener noreferrer">
               <FaInstagram size="28" className="text-secondary-foreground hover:text-primary-foreground transition-colors" />
-            </NavLink>
-            <NavLink to="https://www.linkedin.com/in/adwoa-pokua-aboagye-a22293298/">
+            </a>
+            <a href="https://www.linkedin.com/in/adwoa-pokua-aboagye-a22293298/" target="_blank" rel="noopener noreferrer">
               <FaLinkedin size="28" className="text-secondary-foreground hover:text-primary-foreground transition-colors" />
-            </NavLink>
+            </a>
           </div>
         </div> 
     </div>
