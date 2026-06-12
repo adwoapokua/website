@@ -8,6 +8,7 @@ import {
 import { Home, User, FolderOpen, BookOpen, Mail } from "lucide-react";
 import { Menu } from "lucide-react";
 import { SheetFooter } from "../ui/sheet";
+import {Button} from "../ui/button"
 
 const links = [
   {
@@ -79,7 +80,10 @@ function Navbar() {
                   )
                 })
               }
-            </div>
+      </div>
+      <div className="hidden lg:block">
+          <a href="/resume.pdf" download="Aboagye,AdwoaPokuaCV.pdf"><Button>Hire Me</Button></a>
+      </div>
     </div>
   )
 }
