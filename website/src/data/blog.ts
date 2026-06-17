@@ -13,7 +13,7 @@ export type BlogPost = {
 export const blogs: BlogPost[] = [
   {
     id: 1,
-    image: "./about.jpg",
+    image: "/about.jpg",
     date: "June 2, 2026",
     title: "Understanding System Design for Modern Applications",
     excerpt:
@@ -26,7 +26,7 @@ export const blogs: BlogPost[] = [
   },
   {
     id: 2,
-    image: "./image1.png",
+    image: "/image1.png",
     date: "May 28, 2026",
     title: "10 React Performance Optimization Techniques",
     excerpt:
@@ -39,7 +39,7 @@ export const blogs: BlogPost[] = [
   },
   {
     id: 3,
-    image: "./image2.png",
+    image: "/image2.png",
     date: "May 20, 2026",
     title: "Why TypeScript Makes Large Projects Easier",
     excerpt:

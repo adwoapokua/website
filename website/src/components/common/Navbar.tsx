@@ -40,11 +40,11 @@ const links = [
 
 function Navbar() {
   return (
-    <div className="flex justify-between items-center fixed top-0 h-16 p-3 border-b-2 shadow-sm w-full bg-background z-40">
+    <div className="flex justify-between items-center fixed top-0 h-14 p-3 border-b-2 shadow-xs w-full bg-background z-40">
       <div className="flex gap-2">
-        <div className="border-2 border-primary rounded-4xl h-8 w-8 p-1 grid place-items-center">
+        <a href="/" className="border-2 border-primary rounded-4xl h-8 w-8 p-1 grid place-items-center">
           <span className="text-secondary font-semibold">AP</span>
-        </div>
+        </a>
         <a className="text-secondary grid items-center font-semibold">
           Adwoa Pokua
         </a>
