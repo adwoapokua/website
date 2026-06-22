@@ -41,7 +41,7 @@ function BlogDetails() {
             />
           </div>
 
-          <div className="w-full text-sm sm:text-base leading-relaxed flex flex-col gap-4">
+          <div className="w-full text-secondary text-sm sm:text-base leading-relaxed flex flex-col gap-4">
             {blog.content.split("\n\n").map((paragraph, index) => (
               <p key={index}>{paragraph}</p>
             ))}

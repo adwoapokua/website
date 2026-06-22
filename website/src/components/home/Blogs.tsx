@@ -9,7 +9,7 @@ function Blogs() {
   return (
     <>
       <Navbar />
-      <main className="pt-24 pb-16 px-6 lg:px-20 flex flex-col mx-auto max-w-6xl gap-5">
+      <main className="pt-24 pb-16 px-6 lg:px-20 flex flex-col min-h-screen mx-auto max-w-6xl gap-5">
         <div className="text-secondary flex justify-between">
             <p className="text-2xl font-semibold">Blogs</p>
             <Link to="/"><span className="flex gap-2 justify-center items-center"><ArrowLeft size="20"/> <span className="text-sm font-semibold">Go Back</span></span> </Link>
@@ -19,7 +19,7 @@ function Blogs() {
               blogs.map((blog) => {
               return (
                   <div key={blog.id} className="flex flex-col w-full border shadow-xl">
-                      <div className="h-48 overflow-hidden">
+                      <div className="h-56 overflow-hidden">
                         <img src={blog.image} alt={blog.title} className="w-full h-full object-cover"/>
                       </div>
                       <div className="flex flex-col gap-3 p-5 flex-1">
