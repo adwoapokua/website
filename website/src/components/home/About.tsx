@@ -1,4 +1,8 @@
-  import {
+import type { About } from "@/types/sanity";
+import { useEffect, useState } from "react";
+import { client } from '../../lib/sanityClient'
+import { urlFor } from '../../lib/urlFor'
+import {
   FaReact,
   FaJava,
   FaJs,
@@ -26,6 +30,12 @@ import {
 
 
 function About() {
+  const [about, setAbout] = useState<About>()
+  
+  useEffect(() => {
+      client.fetch<About>(`*[_type == "project"] | order(_createdAt desc)`)
+        .then(data => setAbout(data))
+    }, [])
   return (
     <section className="min-h-screen flex flex-col gap-5 mx-10 lg:mx-20 scroll-mt-24" id="about" >
       <div className="text-primary lg:text-3xl lg:font-bold">ABOUT ME</div>
@@ -33,13 +43,10 @@ function About() {
       <div className="flex flex-col lg:gap-10">
         <div className="flex flex-col lg:flex-row gap-15">
           <div className="flex flex-col gap-3 lg:w-150">
-            <p className="text-2xl font-semibold text-secondary">Designing digital spaces with simplicity, rhythm, and attention to detail.</p>
-            <p className="text-xl text-secondary">Adwoa is a software engineer and student in Accra,
-                exploring the meeting point between mathematics,
-                technology, and modern web design.
-            </p>
+            <p className="text-2xl font-semibold text-secondary">{about.p_1}</p>
+            <p className="text-xl text-secondary">{about.p_2}</p>
           </div>
-        <img src="./about.jpg" alt="about me" className="w-full h-50 lg:w-120 lg:h-100"/>
+        <img src={urlFor(about.image).width(600).url()} alt="about me" className="w-full h-50 lg:w-120 lg:h-100"/>
       </div>
 
       <div className="flex flex-col gap-5 mt-10 lg:mt-0">
