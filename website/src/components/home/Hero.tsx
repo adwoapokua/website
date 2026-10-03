@@ -8,7 +8,7 @@ function Hero() {
 
       <div className="relative shrink-0">
         <img
-          src="./moi.png"
+          src="./moi.jpg"
           alt="Adwoa Pokua"
           className="relative rounded-2xl w-40 h-48 sm:w-56 sm:h-64 lg:w-72 lg:h-80 object-cover border-4 border-primary"
         />
