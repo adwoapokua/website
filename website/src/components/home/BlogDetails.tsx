@@ -1,14 +1,48 @@
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
-import { blogs } from "@/data/blog";
 import Navbar from "../common/Navbar";
 import { ArrowLeftIcon } from "lucide-react";
+import type { Blog } from "@/types/sanity";
+import { client } from "../../lib/sanityClient";
+import { urlFor } from "../../lib/urlFor";
+import { PortableText, type PortableTextComponents } from "@portabletext/react";
+
+const components: PortableTextComponents = {
+  types: {
+    image: ({ value }) => (
+      <img src={urlFor(value).width(900).url()} alt={value.alt ?? ""} className="w-full rounded-2xl" />
+    ),
+  },
+  block: {
+    h2: ({ children }) => <h2 className="text-xl sm:text-2xl font-semibold text-primary">{children}</h2>,
+    h3: ({ children }) => <h3 className="text-lg sm:text-xl font-semibold text-primary">{children}</h3>,
+    blockquote: ({ children }) => <blockquote className="border-l-4 pl-4 italic">{children}</blockquote>,
+  },
+  list: {
+    bullet: ({ children }) => <ul className="list-disc pl-6 flex flex-col gap-1">{children}</ul>,
+    number: ({ children }) => <ol className="list-decimal pl-6 flex flex-col gap-1">{children}</ol>,
+  },
+  marks: {
+    link: ({ value, children }) => (
+      <a href={value?.href} target="_blank" rel="noopener noreferrer" className="underline">{children}</a>
+    ),
+  },
+};
 
 function BlogDetails() {
-  const { blogTitle } = useParams();
-  const decoded = decodeURIComponent(blogTitle ?? "");
-  const blog = blogs.find((b) => b.title === decoded);
+  const { slug } = useParams();
+  const [result, setResult] = useState<{ slug?: string; blog: Blog | null }>();
 
-  if (!blog) return (
+  useEffect(() => {
+    client
+      .fetch<Blog | null>(`*[_type == "blog" && slug.current == $slug][0]`, { slug })
+      .then((data) => setResult({ slug, blog: data }));
+  }, [slug]);
+
+  const loaded = result !== undefined && result.slug === slug;
+  const blog = loaded ? result.blog : null;
+
+  if (loaded && !blog) return (
     <>
       <Navbar />
       <main className="min-h-screen flex flex-col items-center justify-center gap-4 text-primary">
@@ -19,6 +53,8 @@ function BlogDetails() {
       </main>
     </>
   );
+
+  if (!blog) return null;
 
   return (
     <div className="min-h-screen">
@@ -35,16 +71,14 @@ function BlogDetails() {
 
           <div className="w-full h-56 sm:h-72 lg:h-96 overflow-hidden rounded-2xl">
             <img
-              src={blog.image}
+              src={urlFor(blog.image).width(900).url()}
               alt={blog.title}
               className="w-full h-full object-cover"
             />
           </div>
 
           <div className="w-full text-secondary text-sm sm:text-base leading-relaxed flex flex-col gap-4">
-            {blog.content.split("\n\n").map((paragraph, index) => (
-              <p key={index}>{paragraph}</p>
-            ))}
+            <PortableText value={blog.content} components={components} />
           </div>
         </div>
       </main>

@@ -1,11 +1,22 @@
-import { blogs } from "@/data/blog";
+import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import Navbar from "../common/Navbar";
 import { Link } from "react-router";
 import Footer from "../common/Footer";
+import type { Blog } from "@/types/sanity";
+import { client } from "../../lib/sanityClient";
+import { urlFor } from "../../lib/urlFor";
 
 function Blogs() {
+  const [blogs, setBlogs] = useState<Blog[]>([]);
+
+  useEffect(() => {
+    client
+      .fetch<Blog[]>(`*[_type == "blog"] | order(_createdAt desc)`)
+      .then((data) => setBlogs(data));
+  }, []);
+
   return (
     <>
       <Navbar />
@@ -18,16 +29,16 @@ function Blogs() {
           {
               blogs.map((blog) => {
               return (
-                  <div key={blog.id} className="flex flex-col w-full border shadow-xl">
+                  <div key={blog._id} className="flex flex-col w-full border shadow-xl">
                       <div className="h-56 overflow-hidden">
-                        <img src={blog.image} alt={blog.title} className="w-full h-full object-cover"/>
+                        <img src={urlFor(blog.image).width(600).url()} alt={blog.title} className="w-full h-full object-cover"/>
                       </div>
                       <div className="flex flex-col gap-3 p-5 flex-1">
                           <div className="font-bold text-sm">{blog.date}</div>
                           <div className="text-xl font-bold">{blog.title}</div>
                           <div>{blog.excerpt}</div>
                           <div className="mt-auto pt-3">
-                            <Link to={`/blogs/${encodeURIComponent(blog.title)}`}>
+                            <Link to={`/blogs/${blog.slug.current}`}>
                               <Button variant="outline">Read more <ArrowRight /></Button>
                             </Link>
                           </div>
@@ -37,7 +48,7 @@ function Blogs() {
             })
           }
           </div>
-        </main>  
+        </main>
         <Footer/>
     </>
   )

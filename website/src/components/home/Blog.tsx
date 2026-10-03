@@ -1,20 +1,22 @@
 import { Button } from "../ui/button";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router";
-import type { Blog } from "@/types/sanity";
+import type { Blog as BlogData } from "@/types/sanity";
 import { client } from '../../lib/sanityClient'
 import { urlFor } from '../../lib/urlFor'
 import { useEffect, useState } from "react";
 
 function Blog() {
-  const [blogs, setBlogs] = useState<Blog[]>([])
-    
+  const [blogs, setBlogs] = useState<BlogData[]>([])
+
   useEffect(() => {
-    client.fetch<Blog[]>(`*[_type == "project"] | order(_createdAt desc)`)
+    client.fetch<BlogData[]>(`*[_type == "blog"] | order(_createdAt desc)`)
       .then(data => setBlogs(data))
   }, [])
-    const featuredBlog = blogs.find((blog) => blog.featured)!;
+    const featuredBlog = blogs.find((blog) => blog.featured);
     const previousBlogs = blogs.filter((blog) => !blog.featured).slice(0,1);
+
+  if (!featuredBlog) return null
 
   return (
     <section id="blog" className="min-h-screen flex flex-col gap-8 mx-10 mb-30 mt-10 lg:mb-15 lg:mt-20 lg:mx-20 scroll-mt-24">
@@ -24,7 +26,7 @@ function Blog() {
       </div>
       <div className="lg:flex lg:gap-5 grid gap-7">
         <div className="grid grid-cols-1 text-secondary">
-          <div key={featuredBlog.id} className="flex flex-col lg:flex-row w-full h-145 lg:w-230 lg:h-120 border shadow-xl ">
+          <div key={featuredBlog._id} className="flex flex-col lg:flex-row w-full h-145 lg:w-230 lg:h-120 border shadow-xl ">
               <div className="overflow-hidden h-70 lg:h-full lg:w-1/2 shrink-0">
                 <img src={urlFor(featuredBlog.image).width(600).url()} alt={featuredBlog.title} className="w-full h-full object-cover"/>
               </div>
@@ -32,7 +34,7 @@ function Blog() {
                   <div className="font-bold">{`FEATURED - ${featuredBlog.date}`}</div>
                   <div className="text-xl font-bold">{featuredBlog.title}</div>
                   <div>{featuredBlog.excerpt}</div>
-                  <Link to={`/blogs/${encodeURIComponent(featuredBlog.title)}`}><Button variant="outline">Read more <ArrowRight /></Button></Link>
+                  <Link to={`/blogs/${featuredBlog.slug.current}`}><Button variant="outline">Read more <ArrowRight /></Button></Link>
               </div>
           </div>
         </div>
@@ -40,7 +42,7 @@ function Blog() {
           {
               previousBlogs.map((blog) => {
               return (
-                  <div key={blog.id} className="flex flex-col w-full h-145 border shadow-xl">
+                  <div key={blog._id} className="flex flex-col w-full h-145 border shadow-xl">
                       <div className="overflow-hidden h-70">
                         <img src={urlFor(blog.image).width(600).url()} alt={blog.title} className="w-full h-full object-cover"/>
                       </div>
@@ -48,7 +50,7 @@ function Blog() {
                           <div className="font-bold">{blog.date}</div>
                           <div className="text-xl font-bold">{blog.title}</div>
                           <div>{blog.excerpt}</div>
-                          <Link to={`/blogs/${encodeURIComponent(blog.title)}`}><Button variant="outline">Read more <ArrowRight /></Button></Link>
+                          <Link to={`/blogs/${blog.slug.current}`}><Button variant="outline">Read more <ArrowRight /></Button></Link>
                       </div>
                   </div>
               )

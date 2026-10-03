@@ -1,7 +1,6 @@
-import imageUrlBuilder from '@sanity/image-url'
+import { createImageUrlBuilder, type SanityImageSource } from '@sanity/image-url'
 import { client } from './sanityClient'
 
-const builder = imageUrlBuilder(client)
+const builder = createImageUrlBuilder(client)
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const urlFor = (source: any) => builder.image(source as any)
+export const urlFor = (source: SanityImageSource) => builder.image(source)

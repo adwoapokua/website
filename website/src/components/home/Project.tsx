@@ -4,13 +4,13 @@ import { ArrowRight } from "lucide-react";
 import { useEffect, useState } from 'react'
 import { client } from '../../lib/sanityClient'
 import { urlFor } from '../../lib/urlFor'
-import type { Project } from '../../types/sanity'
+import type { Project as ProjectData } from '../../types/sanity'
 
 function Project() {
-  const [projects, setProjects] = useState<Project[]>([])
+  const [projects, setProjects] = useState<ProjectData[]>([])
 
   useEffect(() => {
-    client.fetch<Project[]>(`*[_type == "project"] | order(_createdAt desc)`)
+    client.fetch<ProjectData[]>(`*[_type == "project"] | order(_createdAt desc)`)
       .then(data => setProjects(data))
   }, [])
 
@@ -29,14 +29,14 @@ function Project() {
                     <div className="flex flex-col gap-5 p-5">
                         <div className="flex flex-wrap gap-1.5">
                             {
-                                p.tools.map((tool) => (
-                                    <div className="rounded-2xl text-xs px-3 py-1 whitespace-nowrap text-center bg-accent/50 text-primary">{tool}</div>
+                                p.tools?.map((tool) => (
+                                    <div key={tool} className="rounded-2xl text-xs px-3 py-1 whitespace-nowrap text-center bg-accent/50 text-primary">{tool}</div>
                                 ))
                             }
                         </div>
                         <div className="text-xl lg:text-lg font-bold">{p.name}</div>
                         <div className="text-sm ">{p.description}</div>
-                        <a target="_blank" rel="noopener noreferrer" href={p.link}> <Button variant="outline">Github <FaGithub /></Button> </a>
+                        {p.link && <a target="_blank" rel="noopener noreferrer" href={p.link}> <Button variant="outline">Github <FaGithub /></Button> </a>}
                     </div>
                 </div>
             )
