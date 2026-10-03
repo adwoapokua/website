@@ -1,4 +1,4 @@
-import type { About } from "@/types/sanity";
+import type { About as AboutData } from "@/types/sanity";
 import { useEffect, useState } from "react";
 import { client } from '../../lib/sanityClient'
 import { urlFor } from '../../lib/urlFor'
@@ -30,12 +30,15 @@ import {
 
 
 function About() {
-  const [about, setAbout] = useState<About>()
-  
+  const [about, setAbout] = useState<AboutData>()
+
   useEffect(() => {
-      client.fetch<About>(`*[_type == "project"] | order(_createdAt desc)`)
+      client.fetch<AboutData>(`*[_type == "about"][0]`)
         .then(data => setAbout(data))
     }, [])
+
+  if (!about) return null
+
   return (
     <section className="min-h-screen flex flex-col gap-5 mx-10 lg:mx-20 scroll-mt-24" id="about" >
       <div className="text-primary lg:text-3xl lg:font-bold">ABOUT ME</div>
